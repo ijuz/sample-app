@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/6b20b1c14d.js" crossorigin="anonymous"></script>
+
+	<title>Contact Form</title>
+</head>
+<body>
+
+	<div class="container">
+		<!--  SEARCH FORM -->
+		<header class="header">
+			
+			<form class="search-bar" action="/" method="GET">
+				<input type="search-name" class="contact-search" name="search-area" placeholder="Search"
+				value={{search}}>
+			</form>
+
+			<!--  ADD-CONTACT BUTTON/ICON -->
+			<a href="{% url 'create' %}"><i class="fas fa-plus-circle add"></i></a>
+		</header>
+
+		<!--  CONTACT LIST -->
+		<section class="contacts-library">
+			{% for Contact in users reversed %}
+			<ul class="contacts-list">
+				
+				<a href="{% url 'profile' Contact.id %}">
+					<div class="contact-section">
+						<li class="list__item">
+							<p class="contact-name">{{Contact.full_name}}</p>
+							<p class="relationship">{{Contact.reletionship}}</p>
+						</li>
+
+						<li class="list__item">
+							<i class="fas fa-phone"></i>
+							<i class="fas fa-sms text"></i>
+						</li>
+					</div>
+				</a>
+				
+
+				<hr>
+
+				
+			</ul>
+			{% empty %}
+				<h3 style="color:#fff;padding:20px;">No contacts found..</h3>
+			{% endfor %}
+		</section>
+	</div>
+
+</body>
+</html>
